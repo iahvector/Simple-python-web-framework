@@ -1,0 +1,248 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "REST API documentation for ACME test",
+    "version": "0.1.0",
+    "title": "ACME Recipes API"
+  },
+  "host": "localhost",
+  "basePath": "/api/v1",
+  "tags": [
+    {
+      "name": "Recipes",
+      "description": "ACME Recipes"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/recipes/": {
+      "post": {
+        "tags": [
+          "recipes"
+        ],
+        "summary": "Create a new recipe",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Recipe json object to be created",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateRecipe"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Recipe"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "recipes"
+        ],
+        "summary": "Get a list of recipes or search for recipes matchinga certain query",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "search_name",
+            "in": "query",
+            "description": "Recipe name to search for",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "search_prep_time",
+            "in": "query",
+            "description": "Maximum time in minutes to prepare the recipe",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "search_difficulty",
+            "in": "query",
+            "description": "Maximum difficulty for the recipe",
+            "required": false,
+            "type": "integer",
+            "enum": [
+              1,
+              2,
+              3
+            ]
+          },
+          {
+            "name": "search_vegetarian",
+            "in": "query",
+            "description": "Whether the recipe is vegetarian or not",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Key to sort the recipes by",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "name",
+              "prep_time",
+              "difficulty"
+            ]
+          },
+          {
+            "name": "sort_direction",
+            "in": "query",
+            "description": "Sort direction of the recipes",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "ascending",
+              "descending"
+            ]
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number for large sized results, zero based",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "description": "Page size for the result",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RecipesList"
+            }
+          }
+        }
+      }
+    },
+    "/recipes/{recipe_id}/": {
+      "get": {
+        "tags": [
+          "recipes"
+        ],
+        "summary": "Get a Recipe by id",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "recipe_id",
+            "in": "path",
+            "description": "ID of the recipe to retrieve, a UUID v4",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Recipe"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CreateRecipe": {
+      "type": "object",
+      "required": [
+        "name",
+        "prep_time",
+        "difficulty",
+        "vegetarian"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Recipe name"
+        },
+        "prep_time": {
+          "type": "integer",
+          "description": "Preparation time in minutes"
+        },
+        "difficulty": {
+          "type": "integer",
+          "description": "Preparation difficulty",
+          "enum": [
+            1,
+            2,
+            3
+          ]
+        },
+        "vegetarian": {
+          "type": "boolean",
+          "description": "Whether the recipe is vegetarian or not"
+        }
+      }
+    },
+    "Recipe": {
+      "type": "object",
+      "required": [
+        "_id",
+        "name",
+        "prep_time",
+        "difficulty",
+        "vegetarian"
+      ],
+      "properties": {
+        "_id": {
+          "type": "string",
+          "description": "Recipe ID"
+        },
+        "name": {
+          "type": "string",
+          "description": "Recipe name"
+        },
+        "prep_time": {
+          "type": "integer",
+          "description": "Preparation time in minutes"
+        },
+        "difficulty": {
+          "type": "integer",
+          "description": "Preparation difficulty",
+          "enum": [
+            1,
+            2,
+            3
+          ]
+        },
+        "vegetarian": {
+          "type": "boolean",
+          "description": "Whether the recipe is vegetarian or not"
+        }
+      }
+    },
+    "RecipesList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Recipe"
+      }
+    }
+  }
+}
