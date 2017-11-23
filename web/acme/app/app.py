@@ -1,6 +1,6 @@
 from pymongo import MongoClient
 from acme import settings
-from acme.app.router import Router
+from PyExpress.router import Router
 from acme.app.api.v1 import recipes_api
 
 # Open Database connection
@@ -10,6 +10,11 @@ db = client.get_database(settings.MONGO['DB_NAME'])
 
 # Initialize the router
 app = Router()
+
+print('==================')
+print(Router)
+print(app)
+print('==================')
 
 # Add routes to the router
 # Get a recipe by id

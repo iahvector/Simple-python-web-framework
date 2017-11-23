@@ -1,6 +1,6 @@
 import json
 from webob import Response, exc
-from acme.app.router import Router
+from PyExpress.router import Router
 from acme.recipes.controller import RecipesController
 from acme.recipes.repository import RecipesMongoRepository
 from acme.recipes.serializers import RecipeSchema
