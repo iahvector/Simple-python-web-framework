@@ -7,4 +7,4 @@ RUN ln -s /server/http/docker/python/run_tests /usr/local/bin/ \
 
 CMD gunicorn --chdir /server/http/web/ \
              -c /server/http/web/gunicorn_config.py \
-             app.app:app
+             acme.app.app:app
