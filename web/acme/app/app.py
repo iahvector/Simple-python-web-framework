@@ -11,11 +11,6 @@ db = client.get_database(settings.MONGO['DB_NAME'])
 # Initialize the router
 app = Router()
 
-print('==================')
-print(Router)
-print(app)
-print('==================')
-
 # Add routes to the router
 # Get a recipe by id
 app.use('/api/v1/recipes/{id}',
