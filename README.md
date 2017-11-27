@@ -1,4 +1,4 @@
-**NOTE:** This code is a solution for a challenge from a company that didn't want it to be public, so I've changed the company name here and inside the code into acme and removed all the git history so it can't be found in previous commits. [ACME](https://en.wikipedia.org/wiki/Acme_Corporation), obviously is not a real company name
+**NOTE:** This code is a solution for a challenge from a company that didn't want it to be public, so I've changed the company name here and inside the code into acme and removed all the git history so it can't be found in previous commits. [ACME](https://en.wikipedia.org/wiki/Acme_Corporation), obviously, is not a real company name
 
 # ACME interview test: Recipes API
 
